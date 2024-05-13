@@ -1,6 +1,6 @@
 //
 //  AppDelegate.h
-//  Jiggler
+//  MM
 //
 //  Created by Ben Haller on Sat Aug 02 2003.
 //  Copyright (c) 2003 Stick Software. All rights reserved.
@@ -34,9 +34,9 @@
 	BOOL jiggleConditionsLikelyToHaveChanged;
 	
 	// Status bar icon variants
-	NSImage *scaledJigglerImage;
-	NSImage *scaledJigglerImageRed;
-	NSImage *scaledJigglerImageGreen;
+	NSImage *scaledMMImage;
+	NSImage *scaledMMImageRed;
+	NSImage *scaledMMImageGreen;
 	
 	// Prevent App Nap
 	id <NSObject> activityToken;

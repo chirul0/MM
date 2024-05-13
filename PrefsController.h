@@ -1,6 +1,6 @@
 //
 //  PrefsController.h
-//  Jiggler
+//  MM
 //
 //  Created by Ben Haller on Wed Jul 23 2003.
 //  Copyright (c) 2003 Stick Software. All rights reserved.
@@ -20,7 +20,7 @@
 	
 	IBOutlet NSSlider *jiggleTimeSlider;
 	IBOutlet NSTextField *jiggleTimeTextfield;
-	IBOutlet NSButton *showJigglerIconWhenJigglingButton;
+	IBOutlet NSButton *showMMIconWhenJigglingButton;
 	IBOutlet NSMatrix *jiggleOnlyWhenIdleRadio;
 	
 	IBOutlet NSMatrix *jiggleStyleRadio;
@@ -47,7 +47,7 @@
 
 	// Cached values
 	int jiggleSeconds;
-	BOOL showJigglerIconWhenJiggling;
+	BOOL showMMIconWhenJiggling;
 	BOOL jiggleOnlyWhenIdle;
 	
 	int jiggleStyle;
@@ -81,7 +81,7 @@
 
 // API for getting specific prefs values
 - (int)jiggleSeconds;
-- (BOOL)showJigglerIconWhenJiggling;
+- (BOOL)showMMIconWhenJiggling;
 - (BOOL)jiggleOnlyWhenIdle;
 
 - (int)jiggleStyle;							// 0 == standard, 1 == "Zen", 2 == "click jiggle"
@@ -107,7 +107,7 @@
 
 // Actions and internals
 - (IBAction)jiggleTimeChanged:(id)sender;
-- (IBAction)showJigglerIconWhenJigglingChanged:(id)sender;
+- (IBAction)showMMIconWhenJigglingChanged:(id)sender;
 - (IBAction)jiggleOnlyWhenIdleChanged:(id)sender;
 
 - (IBAction)jiggleStyleChanged:(id)sender;

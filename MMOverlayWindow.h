@@ -1,6 +1,6 @@
 //
-//  JigglerOverlayWindow.h
-//  Jiggler
+//  MMOverlayWindow.h
+//  MM
 //
 //  Created by Ben Haller on Wed Aug 25 2004.
 //  Copyright (c) 2004 Stick Software. All rights reserved.
@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface JigglerOverlayWindow : NSObject
+@interface MMOverlayWindow : NSObject
 {
 	NSWindow *overlayWindow;
 	

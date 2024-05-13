@@ -11,7 +11,7 @@
 		987BCA05247F5AD80069B2FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 987BCA04247F5AD80069B2FC /* Assets.xcassets */; };
 		987BCA08247F5AD80069B2FC /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 987BCA06247F5AD80069B2FC /* MainMenu.xib */; };
 		987BCA0B247F5AD80069B2FC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 987BCA0A247F5AD80069B2FC /* main.m */; };
-		987BCA24247F5CAE0069B2FC /* JigglerOverlayWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 987BCA1F247F5CAE0069B2FC /* JigglerOverlayWindow.m */; };
+		987BCA24247F5CAE0069B2FC /* MMOverlayWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 987BCA1F247F5CAE0069B2FC /* MMOverlayWindow.m */; };
 		987BCA25247F5CAE0069B2FC /* TimedQuitController.m in Sources */ = {isa = PBXBuildFile; fileRef = 987BCA21247F5CAE0069B2FC /* TimedQuitController.m */; };
 		987BCA26247F5CAE0069B2FC /* PrefsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 987BCA23247F5CAE0069B2FC /* PrefsController.m */; };
 		987BCA31247F5CD30069B2FC /* CocoaExtra.m in Sources */ = {isa = PBXBuildFile; fileRef = 987BCA27247F5CD20069B2FC /* CocoaExtra.m */; };
@@ -37,14 +37,14 @@
 		987BCA07247F5AD80069B2FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		987BCA09247F5AD80069B2FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		987BCA0A247F5AD80069B2FC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		987BCA0C247F5AD80069B2FC /* Jiggler.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Jiggler.entitlements; sourceTree = "<group>"; };
+		987BCA0C247F5AD80069B2FC /* MM.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MM.entitlements; sourceTree = "<group>"; };
 		987BCA14247F5BBD0069B2FC /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		987BCA15247F5BBD0069B2FC /* TO DO */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "TO DO"; sourceTree = "<group>"; };
 		987BCA16247F5BBD0069B2FC /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		987BCA17247F5BBD0069B2FC /* README.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = README.html; sourceTree = "<group>"; };
 		987BCA1E247F5CAE0069B2FC /* PrefsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefsController.h; sourceTree = "<group>"; };
-		987BCA1F247F5CAE0069B2FC /* JigglerOverlayWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JigglerOverlayWindow.m; sourceTree = "<group>"; };
-		987BCA20247F5CAE0069B2FC /* JigglerOverlayWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JigglerOverlayWindow.h; sourceTree = "<group>"; };
+		987BCA1F247F5CAE0069B2FC /* MMOverlayWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMOverlayWindow.m; sourceTree = "<group>"; };
+		987BCA20247F5CAE0069B2FC /* MMOverlayWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMOverlayWindow.h; sourceTree = "<group>"; };
 		987BCA21247F5CAE0069B2FC /* TimedQuitController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimedQuitController.m; sourceTree = "<group>"; };
 		987BCA22247F5CAE0069B2FC /* TimedQuitController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimedQuitController.h; sourceTree = "<group>"; };
 		987BCA23247F5CAE0069B2FC /* PrefsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrefsController.m; sourceTree = "<group>"; };
@@ -109,8 +109,8 @@
 				987BCA1C247F5BF60069B2FC /* Stick Software */,
 				987BCA01247F5AD80069B2FC /* AppDelegate.h */,
 				987BCA02247F5AD80069B2FC /* AppDelegate.m */,
-				987BCA20247F5CAE0069B2FC /* JigglerOverlayWindow.h */,
-				987BCA1F247F5CAE0069B2FC /* JigglerOverlayWindow.m */,
+				987BCA20247F5CAE0069B2FC /* MMOverlayWindow.h */,
+				987BCA1F247F5CAE0069B2FC /* MMOverlayWindow.m */,
 				987BCA1E247F5CAE0069B2FC /* PrefsController.h */,
 				987BCA23247F5CAE0069B2FC /* PrefsController.m */,
 				987BCA22247F5CAE0069B2FC /* TimedQuitController.h */,
@@ -123,7 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				987BCA4D248030420069B2FC /* apple.png */,
-				987BCA0C247F5AD80069B2FC /* Jiggler.entitlements */,
+				987BCA0C247F5AD80069B2FC /* MM.entitlements */,
 				987BCA04247F5AD80069B2FC /* Assets.xcassets */,
 				987BCA09247F5AD80069B2FC /* Info.plist */,
 				987BCA36247F5D090069B2FC /* Localizable.strings */,
@@ -250,7 +250,7 @@
 			files = (
 				987BCA35247F5CD30069B2FC /* SSVersionChecker.m in Sources */,
 				987BCA0B247F5AD80069B2FC /* main.m in Sources */,
-				987BCA24247F5CAE0069B2FC /* JigglerOverlayWindow.m in Sources */,
+				987BCA24247F5CAE0069B2FC /* MMOverlayWindow.m in Sources */,
 				987BCA31247F5CD30069B2FC /* CocoaExtra.m in Sources */,
 				987BCA32247F5CD30069B2FC /* SSCPU.m in Sources */,
 				987BCA26247F5CAE0069B2FC /* PrefsController.m in Sources */,

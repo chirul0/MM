@@ -1,21 +1,21 @@
 //
-//  JigglerOverlayWindow.m
-//  Jiggler
+//  MMOverlayWindow.m
+//  MM
 //
 //  Created by Ben Haller on Wed Aug 25 2004.
 //  Copyright (c) 2004 Stick Software. All rights reserved.
 //
 
-#import "JigglerOverlayWindow.h"
+#import "MMOverlayWindow.h"
 
 
-static NSString *JigglerOverlayHorizontalPositionDefaultsKey = @"OverlayHorizontalPosition";
-static NSString *JigglerOverlayVerticalPositionDefaultsKey = @"OverlayVerticalPosition";
+static NSString *MMOverlayHorizontalPositionDefaultsKey = @"OverlayHorizontalPosition";
+static NSString *MMOverlayVerticalPositionDefaultsKey = @"OverlayVerticalPosition";
 
 
-@interface JigglerOverlayWindow (PrivateAPI)
+@interface MMOverlayWindow (PrivateAPI)
 
-+ (JigglerOverlayWindow *)sharedOverlayWindow;
++ (MMOverlayWindow *)sharedOverlayWindow;
 
 - (void)scheduleTimer;
 
@@ -26,40 +26,40 @@ static NSString *JigglerOverlayVerticalPositionDefaultsKey = @"OverlayVerticalPo
 @end
 
 
-@interface JigglerOverlayView : NSImageView
+@interface MMOverlayView : NSImageView
 
 @end
 
 
-@implementation JigglerOverlayWindow
+@implementation MMOverlayWindow
 
 + (void)activateOverlay
 {
-	JigglerOverlayWindow *sharedOverlay = [JigglerOverlayWindow sharedOverlayWindow];
+	MMOverlayWindow *sharedOverlay = [MMOverlayWindow sharedOverlayWindow];
 	
 	[sharedOverlay activate];
 }
 
 + (void)deactivateOverlay
 {
-	JigglerOverlayWindow *sharedOverlay = [JigglerOverlayWindow sharedOverlayWindow];
+	MMOverlayWindow *sharedOverlay = [MMOverlayWindow sharedOverlayWindow];
 	
 	[sharedOverlay deactivate];
 }
 
 + (BOOL)isActivated
 {
-	JigglerOverlayWindow *sharedOverlay = [JigglerOverlayWindow sharedOverlayWindow];
+	MMOverlayWindow *sharedOverlay = [MMOverlayWindow sharedOverlayWindow];
 	
 	return [sharedOverlay isActivated];
 }
 
-+ (JigglerOverlayWindow *)sharedOverlayWindow
++ (MMOverlayWindow *)sharedOverlayWindow
 {
-	static JigglerOverlayWindow *sharedOverlay = nil;
+	static MMOverlayWindow *sharedOverlay = nil;
 	
 	if (!sharedOverlay)
-		sharedOverlay = [[JigglerOverlayWindow alloc] init];
+		sharedOverlay = [[MMOverlayWindow alloc] init];
 	
 	return sharedOverlay;
 }
@@ -69,10 +69,10 @@ static NSString *JigglerOverlayVerticalPositionDefaultsKey = @"OverlayVerticalPo
 	NSScreen *mainScreen = [[NSScreen screens] objectAtIndex:0];
 	NSRect screenFrame = [mainScreen frame];
 	NSRect contentRect;
-	JigglerOverlayView *iconView;
+	MMOverlayView *iconView;
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	NSNumber *horizontalPosition = [defaults objectForKey:JigglerOverlayHorizontalPositionDefaultsKey];
-	NSNumber *verticalPosition = [defaults objectForKey:JigglerOverlayVerticalPositionDefaultsKey];
+	NSNumber *horizontalPosition = [defaults objectForKey:MMOverlayHorizontalPositionDefaultsKey];
+	NSNumber *verticalPosition = [defaults objectForKey:MMOverlayVerticalPositionDefaultsKey];
 	
 	// Figure out a centered rect for the overlay
 	contentRect.size.width = 200;
@@ -130,7 +130,7 @@ static NSString *JigglerOverlayVerticalPositionDefaultsKey = @"OverlayVerticalPo
 										 NSWindowCollectionBehaviorFullScreenDisallowsTiling];
 	
 	// Make our icon view
-	iconView = [[JigglerOverlayView alloc] initWithFrame:NSMakeRect(0, 0, contentRect.size.width, contentRect.size.height)];
+	iconView = [[MMOverlayView alloc] initWithFrame:NSMakeRect(0, 0, contentRect.size.width, contentRect.size.height)];
 	[iconView setEditable:NO];
 	[iconView setImageAlignment:NSImageAlignCenter];
 	[iconView setImageFrameStyle:NSImageFrameGrayBezel];
@@ -243,7 +243,7 @@ static NSString *JigglerOverlayVerticalPositionDefaultsKey = @"OverlayVerticalPo
 
 @end
 
-@implementation JigglerOverlayView
+@implementation MMOverlayView
 
 - (void)mouseDown:(NSEvent *)event
 {
@@ -269,8 +269,8 @@ static NSString *JigglerOverlayVerticalPositionDefaultsKey = @"OverlayVerticalPo
             
 			[eventWindow setFrame:windowFrame display:YES];
 			
-            [[NSUserDefaults standardUserDefaults] setInteger:(int)windowFrame.origin.x forKey:JigglerOverlayHorizontalPositionDefaultsKey];
-            [[NSUserDefaults standardUserDefaults] setInteger:(int)windowFrame.origin.y forKey:JigglerOverlayVerticalPositionDefaultsKey];
+            [[NSUserDefaults standardUserDefaults] setInteger:(int)windowFrame.origin.x forKey:MMOverlayHorizontalPositionDefaultsKey];
+            [[NSUserDefaults standardUserDefaults] setInteger:(int)windowFrame.origin.y forKey:MMOverlayVerticalPositionDefaultsKey];
             
             if ([event type] == NSEventTypeLeftMouseUp)
                 break;

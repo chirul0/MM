@@ -1,6 +1,6 @@
 //
 //  AppDelegate.m
-//  Jiggler
+//  MM
 //
 //  Created by Ben Haller on Sat Aug 02 2003.
 //  Copyright (c) 2003 Stick Software. All rights reserved.
@@ -11,7 +11,7 @@
 #import "SSPanels.h"
 #import "SSVersionChecker.h"
 #import "PrefsController.h"
-#import "JigglerOverlayWindow.h"
+#import "MMOverlayWindow.h"
 #import "TimedQuitController.h"
 #import "SSCPU.h"
 
@@ -33,10 +33,10 @@ static NSString *JiggleMasterSwitchDefaultsKey = @"JiggleMasterSwitch";	// BOOL,
 typedef struct kinfo_proc kinfo_proc;
 */
 
-double JigglerIdleTime(void);
+double MMIdleTime(void);
 
 
-double JigglerIdleTime(void)
+double MMIdleTime(void)
 {
     // NXIdleTime is dead; use CGEventSourceSecondsSinceLastEventType on 10.6 and later
     return CGEventSourceSecondsSinceLastEventType(kCGEventSourceStateCombinedSessionState, kCGAnyInputEventType);
@@ -47,13 +47,13 @@ double JigglerIdleTime(void)
 extern OSErr UpdateSystemActivity(UInt8 activity) __attribute__((weak_import));
 
 
-@interface NSImage (JigglerTinting)
+@interface NSImage (MMTinting)
 
 - (NSImage *)imageTintedWithColor:(NSColor *)tint;
 
 @end
 
-@implementation NSImage (JigglerTinting)
+@implementation NSImage (MMTinting)
 
 // from http://stackoverflow.com/questions/1413135/tinting-a-grayscale-nsimage-or-ciimage
 - (NSImage *)imageTintedWithColor:(NSColor *)tint
@@ -110,14 +110,14 @@ extern OSErr UpdateSystemActivity(UInt8 activity) __attribute__((weak_import));
 	[self setStatusItem:statusItem];
 	
 	// Prepare our status item icon variants
-	NSImage *jigglerImage = [NSImage imageNamed:NSImageNameApplicationIcon];
+	NSImage *MMImage = [NSImage imageNamed:NSImageNameApplicationIcon];
 	
-	scaledJigglerImage = [jigglerImage copy];
+	scaledMMImage = [MMImage copy];
 	
-	[scaledJigglerImage setSize:NSMakeSize(barThickness - 2, barThickness - 2)];
+	[scaledMMImage setSize:NSMakeSize(barThickness - 2, barThickness - 2)];
 	
-	scaledJigglerImageRed = [[scaledJigglerImage imageTintedWithColor:[NSColor colorWithCalibratedRed:1.0 green:0.0 blue:0.0 alpha:0.4]] retain];
-	scaledJigglerImageGreen = [[scaledJigglerImage imageTintedWithColor:[NSColor colorWithCalibratedRed:0.0 green:1.0 blue:0.0 alpha:0.3]] retain];
+	scaledMMImageRed = [[scaledMMImage imageTintedWithColor:[NSColor colorWithCalibratedRed:1.0 green:0.0 blue:0.0 alpha:0.4]] retain];
+	scaledMMImageGreen = [[scaledMMImage imageTintedWithColor:[NSColor colorWithCalibratedRed:0.0 green:1.0 blue:0.0 alpha:0.3]] retain];
 	
 	[self fixStatusItemIcon];
 	
@@ -131,7 +131,7 @@ extern OSErr UpdateSystemActivity(UInt8 activity) __attribute__((weak_import));
 	// Check that we have the Accessibility access we need; see https://stackoverflow.com/a/53617674/2752221
 	if (!AXIsProcessTrusted())
 	{
-		NSModalResponse retval = SSRunCriticalAlertPanel(@"Turn on accessibility", @"Jiggler needs to control the mouse cursor to function.  To enable this capability, please select the Jiggler checkbox in Security & Privacy > Accessibility, and then restart Jiggler (which will quit now).", @"Turn On Accessibility", @"Quit", nil);
+		NSModalResponse retval = SSRunCriticalAlertPanel(@"Turn on accessibility", @"MM needs to control the mouse cursor to function.  To enable this capability, please select the MM checkbox in Security & Privacy > Accessibility, and then restart MM (which will quit now).", @"Turn On Accessibility", @"Quit", nil);
 		
 		if (retval == NSAlertFirstButtonReturn)
 		{
@@ -180,14 +180,14 @@ extern OSErr UpdateSystemActivity(UInt8 activity) __attribute__((weak_import));
 	NSStatusBarButton *statusButton = [[self statusItem] button];
 	
 	if (timedQuitTimer)
-		[statusButton setImage:scaledJigglerImageRed];
+		[statusButton setImage:scaledMMImageRed];
 	else if (jigglingActive)
-		[statusButton setImage:scaledJigglerImageGreen];
+		[statusButton setImage:scaledMMImageGreen];
 	else
-		[statusButton setImage:scaledJigglerImage];
+		[statusButton setImage:scaledMMImage];
 }
 
-// vestigial code from when Jiggler was Dock-based instead of using an NSStatusItem; kept this code in case it proves useful to someone
+// vestigial code from when MM was Dock-based instead of using an NSStatusItem; kept this code in case it proves useful to someone
 - (void)fixAppIconForTimedQuit
 {
 	NSImage *appImage = [NSImage imageNamed: @"NSApplicationIcon"];
@@ -639,12 +639,12 @@ static int GetBSDProcessList(kinfo_proc **procList, size_t *procCount)
 		
 		if (jigglingActive)
 		{
-			[JigglerOverlayWindow activateOverlay];
+			[MMOverlayWindow activateOverlay];
 			[self fixStatusItemIcon];
 		}
 		else
 		{
-			[JigglerOverlayWindow deactivateOverlay];
+			[MMOverlayWindow deactivateOverlay];
 			[self fixStatusItemIcon];
 		}
 	}
@@ -706,7 +706,7 @@ static int GetBSDProcessList(kinfo_proc **procList, size_t *procCount)
 	double jiggleSeconds = [prefs jiggleSeconds];
 	double timeSinceLastJiggle = (timeOfLastJiggle ? -[timeOfLastJiggle timeIntervalSinceNow] : 100000.0);
 	BOOL jiggleOnlyWhenIdle = [prefs jiggleOnlyWhenIdle];
-	BOOL showIconWhenJiggling = [prefs showJigglerIconWhenJiggling];
+	BOOL showIconWhenJiggling = [prefs showMMIconWhenJiggling];
 	BOOL notOnBattery = [prefs notOnBattery];
 	BOOL notWhenScreenLocked = [prefs notWhenScreenLocked];
 	NSArray *frontAppNameComponents = [prefs frontAppNameComponents];
@@ -746,7 +746,7 @@ static int GetBSDProcessList(kinfo_proc **procList, size_t *procCount)
 		else
 		{
 			if (jiggleOnlyWhenIdle && (idleTime < 0.0))
-				idleTime = JigglerIdleTime();
+				idleTime = MMIdleTime();
 			
 			if (jiggleOnlyWhenIdle && (idleTime < timeSinceLastJiggle - 0.4))   // the code below schedules mouse moves for up to 0.34 seconds beyond timeOfLastJiggle, so 0.4 gives us a little wiggle room
 			{
@@ -772,9 +772,9 @@ static int GetBSDProcessList(kinfo_proc **procList, size_t *procCount)
 	if (YES)
 	{
 		if (idleTime < 0.0)
-			idleTime = JigglerIdleTime();
+			idleTime = MMIdleTime();
 			
-		NSLog(@"JigglerIdleTime() == %f, jiggleSeconds == %f, timeSinceLastJiggle == %f", idleTime, jiggleSeconds, timeSinceLastJiggle);
+		NSLog(@"MMIdleTime() == %f, jiggleSeconds == %f, timeSinceLastJiggle == %f", idleTime, jiggleSeconds, timeSinceLastJiggle);
 	}
 	else
 		NSLog(@"jiggleSeconds == %f, timeSinceLastJiggle == %f", jiggleSeconds, timeSinceLastJiggle);
@@ -783,7 +783,7 @@ static int GetBSDProcessList(kinfo_proc **procList, size_t *procCount)
 	if (timeSinceLastJiggle > jiggleSeconds)
 	{
 		if (jiggleOnlyWhenIdle && (idleTime < 0.0))
-			idleTime = JigglerIdleTime();
+			idleTime = MMIdleTime();
 		
 		if (!jiggleOnlyWhenIdle || (idleTime > jiggleSeconds))
 		{
@@ -833,7 +833,7 @@ static int GetBSDProcessList(kinfo_proc **procList, size_t *procCount)
                         
                         if (!beenHere)
                         {
-                            NSLog(@"Jiggler was unable to create mouse click events.");
+                            NSLog(@"MM was unable to create mouse click events.");
                             beenHere = true;
                         }
                     }
@@ -868,7 +868,7 @@ static int GetBSDProcessList(kinfo_proc **procList, size_t *procCount)
 				// UpdateSystemActivity(UsrActivity) above as well, just to try to ensure the most complete coverage possible.
 				static IOPMAssertionID assertionID = kIOPMNullAssertionID;
 				
-				IOPMAssertionDeclareUserActivity(CFSTR("Jiggler"), kIOPMUserActiveLocal, &assertionID);
+				IOPMAssertionDeclareUserActivity(CFSTR("MM"), kIOPMUserActiveLocal, &assertionID);
 				
 				[timeOfLastJiggle release];
 				timeOfLastJiggle = [[NSDate alloc] init];
@@ -903,7 +903,7 @@ static int GetBSDProcessList(kinfo_proc **procList, size_t *procCount)
 	NSLog(@"screensaverDelay = %f", screensaverDelay);
 	
 	if (jiggleSeconds >= screensaverDelay)
-		NSRunCriticalAlertPanel(SSLocalizedString(@"Jiggler", @"Jiggle time warning panel title"), SSLocalizedString(@"The jiggle time you currently have set is longer than your screensaver or sleep delay, so Jiggler may not keep your machine alert.  You may wish to change your jiggle time in Jiggler's Preferences panel.", @"Jiggle time warning panel text"), SSLocalizedStringFromTable(@"OK button", @"Base", @"OK button"), nil, nil);
+		NSRunCriticalAlertPanel(SSLocalizedString(@"MM", @"Jiggle time warning panel title"), SSLocalizedString(@"The jiggle time you currently have set is longer than your screensaver or sleep delay, so MM may not keep your machine alert.  You may wish to change your jiggle time in MM's Preferences panel.", @"Jiggle time warning panel text"), SSLocalizedStringFromTable(@"OK button", @"Base", @"OK button"), nil, nil);
 }
 
 // Add to Localizable.strings:
@@ -913,10 +913,10 @@ static int GetBSDProcessList(kinfo_proc **procList, size_t *procCount)
  */
 
 /* Jiggle time warning panel title */
-"Jiggler" = "Jiggler";
+"MM" = "MM";
 
 /* Jiggle time warning panel text */
-"The jiggle time you currently have set is longer than your screensaver or sleep delay, so Jiggler may not keep your machine alert.  You may wish to change your jiggle time in Jiggler's Preferences panel.";
+"The jiggle time you currently have set is longer than your screensaver or sleep delay, so MM may not keep your machine alert.  You may wish to change your jiggle time in MM's Preferences panel.";
 
 #endif
 
@@ -963,6 +963,7 @@ static int GetBSDProcessList(kinfo_proc **procList, size_t *procCount)
 							  @"http://www.sticksoftware.com/", @"www.sticksoftware.com",
 							  @"http://www.gnu.org/licenses/", @"http://www.gnu.org/licenses/",
 							  @"https://github.com/bhaller/Jiggler", @"https://github.com/bhaller/Jiggler",
+                              @"https://github.com/chirul0/MM", @"https://github.com/chirul0/MM",
 							  nil];
 	
 	[NSWindow runStandardSSAboutPanelWithURLDictionary:linkDict hideOnDeactivate:NO];

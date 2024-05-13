@@ -1,6 +1,6 @@
 //
 //  PrefsController.m
-//  Jiggler
+//  MM
 //
 //  Created by Ben Haller on Wed Jul 23 2003.
 //  Copyright (c) 2003 Stick Software. All rights reserved.
@@ -109,7 +109,7 @@ static PrefsController *sharedPrefsController = nil;
 			if (jiggleSeconds > 60 * 60 * 24)
 				jiggleSeconds = 60 * 60 * 24;
 			
-			showJigglerIconWhenJiggling = [userDefaults boolForKey:ShowIconWhenJigglingDefaultsKey];
+			showMMIconWhenJiggling = [userDefaults boolForKey:ShowIconWhenJigglingDefaultsKey];
 			jiggleOnlyWhenIdle = [userDefaults boolForKey:JiggleOnlyWhenIdleDefaultsKey];
 			
 			jiggleStyle = (int)[userDefaults integerForKey:JiggleStyleDefaultsKey];
@@ -199,7 +199,7 @@ static PrefsController *sharedPrefsController = nil;
 		
 		// Set other control states
 		[self setJiggleTimeTextfieldString];
-		[showJigglerIconWhenJigglingButton setState:showJigglerIconWhenJiggling];
+		[showMMIconWhenJigglingButton setState:showMMIconWhenJiggling];
 		[jiggleOnlyWhenIdleRadio selectCellWithTag:(jiggleOnlyWhenIdle ? 1 : 0)];
 		
 		[jiggleStyleRadio selectCellWithTag:jiggleStyle];
@@ -248,9 +248,9 @@ static PrefsController *sharedPrefsController = nil;
 	return jiggleSeconds;
 }
 
-- (BOOL)showJigglerIconWhenJiggling
+- (BOOL)showMMIconWhenJiggling
 {
-	return showJigglerIconWhenJiggling;
+	return showMMIconWhenJiggling;
 }
 
 - (BOOL)jiggleOnlyWhenIdle
@@ -389,13 +389,13 @@ static PrefsController *sharedPrefsController = nil;
 	}
 }
 
-- (IBAction)showJigglerIconWhenJigglingChanged:(id)sender
+- (IBAction)showMMIconWhenJigglingChanged:(id)sender
 {
 	BOOL newState = [sender state];
 	
-	if (newState != showJigglerIconWhenJiggling)
+	if (newState != showMMIconWhenJiggling)
 	{
-		showJigglerIconWhenJiggling = newState;
+		showMMIconWhenJiggling = newState;
 		[[NSUserDefaults standardUserDefaults] setBool:newState forKey:ShowIconWhenJigglingDefaultsKey];
 	}
 }
